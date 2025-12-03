@@ -10,7 +10,6 @@ namespace PointRegion
     {
         static void Main(string[] args)
         {
-            // 1. Ввод данных
             Console.WriteLine("Введите координату x:");
             double x = double.Parse(Console.ReadLine());
 
@@ -23,21 +22,36 @@ namespace PointRegion
             Console.WriteLine("Введите радиус r2:");
             double r2 = double.Parse(Console.ReadLine());
 
-            // 2. Определяем границы (внутренний и внешний радиусы)
-            // Пользователь мог ввести их в любом порядке
             double rMin = Math.Min(r1, r2);
             double rMax = Math.Max(r1, r2);
 
-            // 3. Вычисляем квадрат расстояния от точки до (0,0)
-            // x^2 + y^2
             double distanceSquared = x * x + y * y;
-
-            // Квадраты радиусов для сравнения
             double rMinSquared = rMin * rMin;
             double rMaxSquared = rMax * rMax;
 
-            Console.WriteLine($"Расстояние в квадрате: {distanceSquared}");
+            // Точность для сравнения (погрешность double)
+            double epsilon = 0.000001;
+
+            // 4. Проверяем условия
+            // Проверка: На границе
+            if (Math.Abs(distanceSquared - rMinSquared) < epsilon ||
+                Math.Abs(distanceSquared - rMaxSquared) < epsilon)
+            {
+                Console.WriteLine("На границе");
+            }
+            // Проверка: Внутри области (кольца)
+            else if (distanceSquared > rMinSquared && distanceSquared < rMaxSquared)
+            {
+                Console.WriteLine("Да");
+            }
+            // Иначе: Вне области
+            else
+            {
+                Console.WriteLine("Нет");
+            }
+
             Console.ReadLine();
         }
     }
-}
+    }
+
