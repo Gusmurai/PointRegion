@@ -10,8 +10,11 @@ namespace PointRegion
     {
         static void Main(string[] args)
         {
+            // [Коммит 4: Добавлена обработка ошибок и проверка входных данных] 
+            // Блок try-catch для защиты от ввода текста вместо чисел
             try
             {
+                // [Коммит 1: Начальная структура программы и ввод данных]
                 Console.WriteLine("Введите координату x:");
                 double x = double.Parse(Console.ReadLine());
 
@@ -24,13 +27,15 @@ namespace PointRegion
                 Console.WriteLine("Введите радиус r2:");
                 double r2 = double.Parse(Console.ReadLine());
 
-                // Проверка на корректность радиусов
+                // [Коммит 4: Добавлена обработка ошибок и проверка входных данных]
+                // Проверка на корректность радиусов (не могут быть отрицательными)
                 if (r1 < 0 || r2 < 0)
                 {
                     Console.WriteLine("Ошибка: Радиус не может быть отрицательным.");
                     return;
                 }
 
+                //  [Коммит 2: Реализация расчетов расстояния и границ области] 
                 double rMin = Math.Min(r1, r2);
                 double rMax = Math.Max(r1, r2);
 
@@ -38,6 +43,7 @@ namespace PointRegion
                 double rMinSquared = rMin * rMin;
                 double rMaxSquared = rMax * rMax;
 
+                // [Коммит 3: Добавлена логика определения положения точки] 
                 double epsilon = 0.000001;
 
                 if (Math.Abs(distanceSquared - rMinSquared) < epsilon ||
@@ -54,6 +60,7 @@ namespace PointRegion
                     Console.WriteLine("Нет");
                 }
             }
+            //  [Коммит 4 (продолжение): Обработка ошибок]
             catch (FormatException)
             {
                 Console.WriteLine("Ошибка: Пожалуйста, вводите только числа.");
@@ -63,4 +70,3 @@ namespace PointRegion
         }
     }
 }
-    
