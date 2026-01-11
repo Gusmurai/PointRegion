@@ -67,6 +67,8 @@ namespace PointRegion
             }
 
             Console.ReadLine();
+
+            // тест
         }
     }
 }
